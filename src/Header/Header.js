@@ -11,8 +11,10 @@ const Header = () => {
         <Carousel.Item>
           <img className="d-block w-100" src={caro1} alt="First slide" />
           <Carousel.Caption>
-            <h3 className="text-4xl text-blue-700">Doctor Service</h3>
-            <p className="text-2xl text-blue-500">
+            <h3 className="lg:text-4xl sm:text-4xl text-blue-700">
+              Doctor Service
+            </h3>
+            <p className="sm:text-sm lg:text-2xl text-blue-500">
               We have an expert Dcotor Team.They Server paitent carefully.
             </p>
           </Carousel.Caption>
@@ -21,8 +23,10 @@ const Header = () => {
           <img className="d-block w-100" src={caro2} alt="Second slide" />
 
           <Carousel.Caption>
-            <h3 className="text-4xl text-blue-700">Ambulance Service</h3>
-            <p className="text-2xl text-blue-500">
+            <h3 className="lg:text-4xl sm:text-4xl text-blue-700">
+              Ambulance Service
+            </h3>
+            <p className="sm:text-sm lg:text-2xl text-blue-500">
               For emergency medical purpose we also provide ambulance service
             </p>
           </Carousel.Caption>
@@ -31,8 +35,10 @@ const Header = () => {
           <img className="d-block w-100" src={caro3} alt="Third slide" />
 
           <Carousel.Caption>
-            <h3 className="text-4xl text-blue-700">Medicine Delivary</h3>
-            <p className="text-2xl text-blue-500">
+            <h3 className="lg:text-4xl sm:text-4xl text-blue-700">
+              Medicine Delivary
+            </h3>
+            <p className="sm:text-sm lg:text-2xl text-blue-500">
               Medicine is the science and practice of caring for a patient and
               promoting their health.
             </p>

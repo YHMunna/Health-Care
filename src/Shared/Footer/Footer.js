@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="grid grid-cols-3 gap-4 bg-gray-900 text-white py-6">
+    <div className="grid lg:grid-cols-3 lg:gap-4 sm:grid-cols-1 sm:gap-6 bg-gray-900 text-white py-6">
       <div>
         <h6>
           <i className="fab fa-facebook"></i> Facebook
