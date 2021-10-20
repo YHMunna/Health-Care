@@ -7,6 +7,15 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
+  // handle email log
+  const Emaillog = (e) => {
+    setEmail(e.target.value);
+  };
+
+  // handle PASS log
+  const Passwordlog = (e) => {
+    setPassword(e.target.value);
+  };
   //handle login
   const handlelog = (e) => {
     const auth = getAuth();
@@ -16,10 +25,9 @@ const Login = () => {
         const user = result.user;
         setUser(user);
         console.log(user);
-        // ... history.push("/home");
+        history.push("/home");
       })
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorMessage);
       });
@@ -31,7 +39,7 @@ const Login = () => {
         <div className="form-group py-6">
           <label htmlFor="exampleInputEmail1">Email address</label>
           <input
-            onBlur={setEmail}
+            onBlur={Emaillog}
             type="email"
             className="form-control"
             id="exampleInputEmail1"
@@ -42,7 +50,7 @@ const Login = () => {
         <div className="form-group py-3">
           <label htmlFor="exampleInputPassword1">Password</label>
           <input
-            onBlur={setPassword}
+            onBlur={Passwordlog}
             type="password"
             className="form-control"
             id="exampleInputPassword1"
