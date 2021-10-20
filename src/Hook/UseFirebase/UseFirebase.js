@@ -38,6 +38,6 @@ const useFirebase = () => {
   });
   //signin]
 
-  return { signInWithGoogle, user, logOut };
+  return { signInWithGoogle, user, setUser, logOut };
 };
 export default useFirebase;

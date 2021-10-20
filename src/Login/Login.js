@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import useAuth from "../Hook/UseAuth";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import initializeAuthentication from "../Firebase/Firebase.init";
+initializeAuthentication();
 const Login = () => {
+  const auth = getAuth();
   const { user, setUser, signInWithGoogle } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
+  const location = useLocation();
   // handle email log
   const Emaillog = (e) => {
     setEmail(e.target.value);
@@ -16,22 +20,24 @@ const Login = () => {
   const Passwordlog = (e) => {
     setPassword(e.target.value);
   };
+  const redirect_uri = location.state?.from || "/home";
   //handle login
   const handlelog = (e) => {
-    const auth = getAuth();
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((result) => {
         const user = result.user;
         setUser(user);
         console.log(user);
-        history.push("/home");
+
+        history.push(redirect_uri);
       })
       .catch((error) => {
         const errorMessage = error.message;
         console.log(errorMessage);
       });
   };
+
   return (
     <div>
       <h1 className="text-xl">Please, login</h1>
