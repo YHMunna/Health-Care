@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import initializeAuthentication from "../Firebase/Firebase.init";
 initializeAuthentication();
@@ -8,6 +8,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const history = useHistory();
   //toggle
   const toggleLogin = (e) => {
     console.log(e.target);
@@ -17,7 +18,7 @@ const Register = () => {
     setEmail(e.target.value);
   };
 
-  // handle email change
+  // handle PASS change
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
@@ -33,6 +34,7 @@ const Register = () => {
         const user = result.user;
         console.log(user);
         setError("");
+        history.push("/login");
       })
       .catch((error) => {
         setError(error.message);

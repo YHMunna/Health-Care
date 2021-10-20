@@ -33,7 +33,7 @@ const useFirebase = () => {
   //auth change
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      setUser(user);
+      // setUser(user);
     }
   });
   //signin]

@@ -5,6 +5,7 @@ import useAuth from "../Hook/UseAuth";
 
 const Menubar = () => {
   const { user, logOut } = useAuth();
+  console.log(user);
   return (
     <div>
       <Navbar bg="dark" variant="dark" sticky="top" expand="lg">

@@ -1,10 +1,28 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import useAuth from "../Hook/UseAuth";
-
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 const Login = () => {
   const { user, signInWithGoogle } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const history = useHistory();
 
+  //handle login
+  const handlelog = () => {
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        // Signed in
+        const user = result.user;
+        // ...
+        history.push("/home");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+  };
   return (
     <div>
       <h1 className="text-xl">Please, login</h1>
@@ -12,6 +30,7 @@ const Login = () => {
         <div className="form-group py-6">
           <label htmlFor="exampleInputEmail1">Email address</label>
           <input
+            onBlur={setEmail}
             type="email"
             className="form-control"
             id="exampleInputEmail1"
@@ -22,6 +41,7 @@ const Login = () => {
         <div className="form-group py-3">
           <label htmlFor="exampleInputPassword1">Password</label>
           <input
+            onBlur={setPassword}
             type="password"
             className="form-control"
             id="exampleInputPassword1"
@@ -29,7 +49,7 @@ const Login = () => {
           />
         </div>
 
-        <button type="submit" className="btn btn-primary ">
+        <button onClick={handlelog} type="submit" className="btn btn-primary ">
           Submit
         </button>
         <br />
