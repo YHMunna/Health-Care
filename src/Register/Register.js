@@ -7,34 +7,35 @@ const Register = () => {
   const auth = getAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState({});
+  const [error, setError] = useState("");
+  //toggle
+  const toggleLogin = (e) => {
+    console.log(e.target);
+  };
   // handle email change
   const handleEmailChnage = (e) => {
     setEmail(e.target.value);
   };
+
   // handle email change
   const handlePasswordChange = (e) => {
-    if (e.target.value < 6) {
-      console.log("error");
-    } else {
-      setPassword(e.target.value);
-    }
+    setPassword(e.target.value);
   };
   //handle register
   const handleRegister = (e) => {
     e.preventDefault();
+    if (e.target.value < 6) {
+      setError("Password Must be 6 Characters");
+      return;
+    }
     createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
-        const { email, displayName, photoURL } = result.user;
-        const userinfo = {
-          Name: displayName,
-          email: email,
-          picture: photoURL,
-        };
-        setUser(userinfo);
+        const user = result.user;
+        console.log(user);
+        setError("");
       })
       .catch((error) => {
-        console.log(error.message);
+        setError(error.message);
       });
   };
 
@@ -45,7 +46,7 @@ const Register = () => {
         <div className="form-group py-6">
           <label htmlFor="exampleInputEmail1">Email address</label>
           <input
-            onChange={handleEmailChnage}
+            onBlur={handleEmailChnage}
             type="email"
             className="form-control"
             id="exampleInputEmail1"
@@ -57,7 +58,7 @@ const Register = () => {
         <div className="form-group py-3">
           <label htmlFor="exampleInputPassword1">Password</label>
           <input
-            onChange={handlePasswordChange}
+            onBlur={handlePasswordChange}
             type="password"
             className="form-control"
             id="exampleInputPassword1"
@@ -65,12 +66,16 @@ const Register = () => {
             required
           />
         </div>
+        <div className="text-danger">{error}</div>
+        <button type="submit" className="btn btn-primary ">
+          Register
+        </button>
       </form>
-      <button type="submit" className="btn btn-primary ">
-        Register
-      </button>
+
       <Link to="/login">
-        <p className="text-red-500 my-2">Already Registered?</p>
+        <p onChange={toggleLogin} className="text-red-500 my-2">
+          Already Registered?
+        </p>
       </Link>
     </div>
   );

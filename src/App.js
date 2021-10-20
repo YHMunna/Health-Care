@@ -35,7 +35,6 @@ function App() {
             <PrivateRoute exact path="/education">
               <Education></Education>
             </PrivateRoute>
-
             <Route exact path="/about">
               <AboutUs></AboutUs>
             </Route>

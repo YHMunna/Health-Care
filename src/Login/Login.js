@@ -3,9 +3,6 @@ import { Link } from "react-router-dom";
 import useAuth from "../Hook/UseAuth";
 
 const Login = () => {
-  //handle sigin
-  // const auth = useAuth();
-  // console.log(auth);
   const { user, signInWithGoogle } = useAuth();
 
   return (
