@@ -3,24 +3,25 @@ import { Link, useHistory } from "react-router-dom";
 import useAuth from "../Hook/UseAuth";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 const Login = () => {
-  const { user, signInWithGoogle } = useAuth();
+  const { user, setUser, signInWithGoogle } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
-
   //handle login
-  const handlelog = () => {
+  const handlelog = (e) => {
     const auth = getAuth();
+    e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((result) => {
-        // Signed in
         const user = result.user;
-        // ...
-        history.push("/home");
+        setUser(user);
+        console.log(user);
+        // ... history.push("/home");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.log(errorMessage);
       });
   };
   return (
